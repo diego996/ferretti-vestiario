@@ -33,7 +33,8 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),
-            'serve' => true,
+            // Nessun URL diretto: i documenti si scaricano solo dalla rotta autenticata consegne.documento.
+            'serve' => false,
             'throw' => false,
             'report' => false,
         ],
