@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\ScaricaDocumentoConsegnaController;
 use App\Http\Middleware\EnsureUserIsActive;
 use App\Livewire\Auth\Login;
 use App\Livewire\Carichi\NuovoCarico;
@@ -9,6 +10,9 @@ use App\Livewire\Catalogo\FormIndumento;
 use App\Livewire\Catalogo\Index as Catalogo;
 use App\Livewire\Colleghi\Index as Colleghi;
 use App\Livewire\Commesse\Index as Commesse;
+use App\Livewire\Consegne\Dettaglio as DettaglioConsegna;
+use App\Livewire\Consegne\Index as Consegne;
+use App\Livewire\Consegne\NuovaConsegna;
 use App\Livewire\Dashboard;
 use App\Livewire\Magazzino\Index as Magazzino;
 use App\Livewire\Movimenti\Index as Movimenti;
@@ -21,6 +25,11 @@ Route::middleware('guest')->group(function () {
 Route::middleware(['auth', EnsureUserIsActive::class])->group(function () {
     Route::redirect('/', '/dashboard');
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
+
+    Route::get('/consegne', Consegne::class)->name('consegne.index');
+    Route::get('/consegne/nuova', NuovaConsegna::class)->name('consegne.create');
+    Route::get('/consegne/{consegna}', DettaglioConsegna::class)->name('consegne.show');
+    Route::get('/consegne/{consegna}/documento', ScaricaDocumentoConsegnaController::class)->name('consegne.documento');
 
     Route::get('/magazzino', Magazzino::class)->name('magazzino.index');
     Route::get('/carichi/nuovo', NuovoCarico::class)->name('carichi.create');
